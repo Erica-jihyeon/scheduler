@@ -3,7 +3,7 @@ import DayListItem from './DayListItem';
 
 export default function DayList(props) {
 
-  const listDays = props.days.map((day, index) => {
+  const listDays = props.days.map((day) => {
     const propObj = {
       ...day,
       selected: day.name === props.day,
@@ -11,7 +11,7 @@ export default function DayList(props) {
     }
     return <DayListItem key={day.id} {...propObj} />
   })
-  
+
   return (
     <ul>
       {listDays}
