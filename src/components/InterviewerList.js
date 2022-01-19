@@ -5,12 +5,13 @@ import "components/InterviewerList.scss";
 export default function DayList(props) {
 
   const listInterviewers = props.interviewers.map((interviewer) => {
-    const propObj = {
-      ...interviewer,
-      selected: interviewer.id === props.interviewer,
-      setInterviewer: props.setInterviewer
-    };
-    return <InterviewerListItem key={interviewer.id} {...propObj}/>
+    return (<InterviewerListItem
+    key={interviewer.id}
+    avatar={interviewer.avatar}
+    name={interviewer.name}
+    selected={interviewer.id === props.interviewer}
+    setInterviewer={() => props.setInterviewer(interviewer.id)}
+    />);
   })
 
   return (
