@@ -10,7 +10,9 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
-import Appointment from "components/Appointment/index.js";
+import Appointment from "components/Appointment/index";
+import Header from "components/Appointment/Header"
+import Empty from "components/Appointment/Empty"
 
 
 storiesOf("Button", module)
@@ -34,10 +36,10 @@ storiesOf("DayListItem", module)
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
   .add("Unselected", () => <DayListItem name="Monday" spots={5} />)
-  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
+  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />)
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
-    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> 
+    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
   ));
 //////////////////
 const days = [
@@ -148,3 +150,5 @@ storiesOf("Appointment", module)
       time="12pm"
     />
   ))
+  .add("Header", () => <Header time="12pm" />)
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />);
