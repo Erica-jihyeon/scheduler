@@ -5,20 +5,24 @@ import "components/Application.scss";
 
 import DayList from './DayList';
 import Appointment from './Appointment';
-import { getAppointmentsForDay, getInterview } from 'helpers/selectors';
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors';
+
+
 
 
 export default function Application(props) {
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
-
+  console.log(state);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  
+  const dailyInterviewers = getInterviewersForDay(state, state.day);
   const setDay = day => setState({...state, day});
+
 
   //render only one time -> dependency is empty array
   useEffect(() => {
@@ -32,9 +36,10 @@ export default function Application(props) {
     })
   }, []);
 
+  //show all appointments of each day
   const scheduleList = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    return (<Appointment key={appointment.id} {...appointment} interview={interview}/>)
+    return (<Appointment key={appointment.id} {...appointment} interview={interview} day={state.day} interviewers={dailyInterviewers}/>)
   })
 
   return (
