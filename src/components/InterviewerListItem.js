@@ -8,13 +8,13 @@ export default function InterviewerListItem(props) {
     "interviewers__item--selected": props.selected
   });
 
-  const interviewerName = () => {
-    if (props.selected) {
-      return props.name;
-    } else {
-      return "";
-    }
-  }
+  // const interviewerName = () => {
+  //   if (props.selected) {
+  //     return props.name;
+  //   } else {
+  //     return "";
+  //   }
+  // }
 
   return (
     <li className={listClass} onClick={props.setInterviewer}>
