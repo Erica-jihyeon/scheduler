@@ -19,7 +19,7 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
-  // console.log(state);
+  console.log(state);
 
   /**
    * Import helper functions
@@ -47,7 +47,7 @@ export default function Application(props) {
   /**
    * Functions to pass to the <Appointment />
    */
-  const bookInterview = (id, interview, cb) => {
+  const bookInterview = (id, interview) => {
     // console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
@@ -57,20 +57,16 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    // setState(prev => ({...prev, appointments}));
-    // setState({...state, appointments});
-    axios.put(`/api/appointments/${id}`, appointment)
+
+    return axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
-        console.log('saved');
-        setState(prev => ({...prev, appointments}));
-        cb('SHOW');
+        setState({...state, appointments});
       })
-      .catch(err => console.log(err.message));
   };
 
 
 
-  const cancelInterview = (id, cb) => {
+  const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -80,19 +76,26 @@ export default function Application(props) {
       [id]: appointment
     }
 
-    axios.delete(`api/appointments/${id}`)
+  
+    return axios.delete(`api/appointments/${id}`)
       .then(() => {
         console.log("deleted");
         setState(prev => ({...prev, appointments}));
-        cb('EMPTY')
       })
-      .catch(err => console.log(err.message));
   };
 
   //Mapping <Appointment />, show all appointments of each day
   const scheduleList = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    return (<Appointment key={appointment.id} {...appointment} interview={interview} day={state.day} interviewers={dailyInterviewers} bookInterview={bookInterview} cancelInterview={cancelInterview}/>)
+    return (
+    <Appointment
+      key={appointment.id}
+      {...appointment}
+      interview={interview}
+      day={state.day}
+      interviewers={dailyInterviewers}
+      bookInterview={bookInterview}
+      cancelInterview={cancelInterview} />)
   })
 
 
