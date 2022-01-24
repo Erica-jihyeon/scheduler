@@ -6,7 +6,7 @@ import "components/Application.scss";
 import DayList from './DayList';
 import Appointment from './Appointment';
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'helpers/selectors';
-import { resolvePlugin } from '@babel/core';
+// import { resolvePlugin } from '@babel/core';
 
 
 
@@ -20,7 +20,7 @@ export default function Application(props) {
     interviewers: {}
   });
   // console.log(state);
-  
+
   /**
    * Import helper functions
    * */
@@ -88,8 +88,6 @@ export default function Application(props) {
       })
       .catch(err => console.log(err.message));
   };
-
-
 
   //Mapping <Appointment />, show all appointments of each day
   const scheduleList = dailyAppointments.map((appointment) => {
