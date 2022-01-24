@@ -8,7 +8,7 @@ export function useVisualMode(initialMode) {
     setMode(newMode);
     if (replace) {
       const newArr = [...history]
-      newArr.splice(-1, 1, "THIRD") 
+      newArr.splice(-1, 1, newMode) 
       setHistory(newArr);
     } else {
       const newArr = [...history]
