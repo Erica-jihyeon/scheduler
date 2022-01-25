@@ -33,6 +33,7 @@ export default function Application(props) {
       {...appointment}
       interview={interview}
       day={state.day}
+      days={state.days}
       interviewers={dailyInterviewers}
       bookInterview={bookInterview}
       cancelInterview={cancelInterview} />)
