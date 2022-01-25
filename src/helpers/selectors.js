@@ -28,16 +28,12 @@ export function getInterview(state, interview) {
 
 
 export function getInterviewersForDay(state, day) {
-  //find the day(return like ["Monday"])
-  const filteredDay = state.days.filter(item => item.name === day);
-  
+  //find the day(return the object)
+  const filteredDay = state.days.find(item => item.name === day);
   const result = [];
-  /**
-   * if day is not found then return empty array
-   * otherwise return an array of the interviewer info object
-   * */
-  if (filteredDay.length !== 0) {
-    filteredDay[0].interviewers.map(num => {
+
+  if (filteredDay) {
+    filteredDay.interviewers.map(num => {
       return result.push(state.interviewers[num]);
     })
   }
