@@ -36,17 +36,20 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const updateSpots = () => {
+      const index = state.days.findIndex(e => e.name === state.day);
+      const days = [...state.days];
+      --days[index].spots;
+      setState({ ...state, appointments, days });
+    }
 
     return axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
         //CREATE -> --spot, EDIT -> no change spot
         if (mode === "CREATE") {
-          const index = state.days.findIndex(e => e.name === state.day)
-          const days = [...state.days]
-          --days[index].spots;
-          setState({ ...state, appointments, days });
+          updateSpots();
         } else {
-          setState({ ...state, appointments});
+          setState({ ...state, appointments });
         }
       })
   };
@@ -61,14 +64,17 @@ export function useApplicationData() {
     const appointments = {
       ...state.appointments,
       [id]: appointment
-    }
+    };
+    const updateSpots = () => {
+      const index = state.days.findIndex(e => e.name === state.day);
+      const days = [...state.days];
+      ++days[index].spots;
+      setState({ ...state, appointments, days });
+    };
 
     return axios.delete(`api/appointments/${id}`)
       .then(() => {
-        const index = state.days.findIndex(e => e.name === state.day)
-        const days = [...state.days]
-        ++days[index].spots;
-        setState({ ...state, appointments, days });
+        updateSpots();
       })
   };
 
