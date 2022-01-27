@@ -6,8 +6,6 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from 'help
 import { useApplicationData } from 'hooks/useApplicationData';
 
 
-
-
 export default function Application(props) {
 
   const {
@@ -26,7 +24,9 @@ export default function Application(props) {
 
   //Mapping <Appointment />, show all appointments of each day
   const scheduleList = dailyAppointments.map((appointment) => {
+    //getInterview returns object {student, interviewer: {id, name}}
     const interview = getInterview(state, appointment.interview);
+
     return (
     <Appointment
       key={appointment.id}

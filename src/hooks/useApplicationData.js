@@ -1,3 +1,7 @@
+/**
+ * custom hook for <Application />
+ */
+
 import { useState, useEffect } from 'react';
 import axios from "axios";
 
